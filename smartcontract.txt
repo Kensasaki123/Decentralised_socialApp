@@ -1,0 +1,65 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+import "./Post.sol";
+
+ contract UserProfile is Post {
+    struct Profile {
+        string nickname;
+        uint256 birthday; // timestamp
+        string profilePicUrl; // IPFS link
+    }
+
+    mapping(address => Profile) public profiles;
+
+    function setProfile(string memory _nickname, uint256 _birthday, string memory _ipfsUrl) public {
+        require(_birthday < block.timestamp, "You weren't born in the future fam");
+        profiles[msg.sender] = Profile({
+            nickname: _nickname,
+            birthday: _birthday,
+            profilePicUrl: _ipfsUrl
+        });
+    }
+
+    function getProfile(address user) public view returns (string memory, uint256, string memory) {
+        Profile memory p = profiles[user];
+        return (p.nickname, p.birthday, p.profilePicUrl);
+    }
+}
+
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract Post {
+    struct PostData {
+        string title;
+        string body;
+        string sender;
+    }
+
+    mapping (address => PostData[]) public posts;
+
+    PostData[] public allPosts;
+
+
+    function setPost(string memory _title, string memory _body, string memory _sender) public {
+        PostData memory newPost = PostData({
+            title: _title,
+            body: _body,
+            sender: _sender
+        });
+
+        posts[msg.sender].push(newPost);
+
+        allPosts.push(newPost);
+    }
+
+    function getAllPost() public view returns (PostData[] memory) {
+        return allPosts;
+    }
+
+    function getUserPosts(address user) public view returns (PostData[] memory) {
+       return posts[user];
+    }
+
+}

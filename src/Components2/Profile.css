@@ -1,0 +1,68 @@
+.root1{
+    height: 100%;
+    width: 100%;
+    background-color: black;
+}
+
+
+
+.infodiv {
+    display: flex;
+    flex-direction: row;
+    height: 30%;
+    background-image: url("/bgimg2.jpg");
+    background-size: cover;       /* or contain / auto / 100px 200px etc */
+    background-repeat: no-repeat; /* to avoid tiling */
+    background-position: center; 
+}
+
+.imgdiv {
+    background-color: rgb(255, 252, 252);
+    border: 3px solid rgb(191, 85, 223);
+
+    height: 50%;
+}
+.img {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.profilepic {
+    border-radius: 50px;
+    border: 2px solid black;
+    padding: 5px;
+    background-color: purple;
+}
+
+.infodiv1 {
+    background-color: rgb(228, 191, 245);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 24px;
+    padding-left: 40px;
+    padding-right: 40px;
+    display: flex;
+    justify-content: center;
+    border: 3px solid rgb(191, 85, 223);
+}
+
+.infodiv2 {
+    background-color: rgb(225, 160, 255);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 24px;
+    padding-left: 40px;
+    padding-right: 40px;
+    display: flex;
+    justify-content: center;
+    border: 3px solid rgb(191, 85, 223);
+}
+
+.moreinfo {
+    background-color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border: 3px solid rgb(191, 85, 223);
+
+
+}
+
