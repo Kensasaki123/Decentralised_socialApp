@@ -4,7 +4,7 @@ import "./Home.css"
 
 
 function Home() {
-  const { account, connectWallet } = useContract();
+  const { connectWallet } = useContract();
 
   return (
    <>

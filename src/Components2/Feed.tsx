@@ -10,7 +10,7 @@ import useLoadingScreen from "../stores/loadingstore";
 function Feed() {
   const { contract, address } = useContract();
   const navigate = useNavigate();
-  const { nickie, setNickie, birthday, setBirthday, uploadfile, setUploadfile} = useProfile();
+  const { nickie, setNickie, setBirthday, uploadfile, setUploadfile} = useProfile();
   const [loginstate, setLoginstate] = useState<boolean>(false)
   const { state, setState } = useLoadingScreen();
 
