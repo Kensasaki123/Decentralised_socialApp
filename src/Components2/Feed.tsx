@@ -3,6 +3,7 @@ import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { useContract } from '../context/ContractContext';
 import { useEffect, useState, useCallback } from 'react';
 import useProfile from "../stores/profilestore";
+import useLoadingScreen from "../stores/loadingstore";
 
 
 
@@ -11,7 +12,8 @@ function Feed() {
   const navigate = useNavigate();
   const { nickie, setNickie, birthday, setBirthday, uploadfile, setUploadfile} = useProfile();
   const [loginstate, setLoginstate] = useState<boolean>(false)
-  
+  const { state, setState } = useLoadingScreen();
+
 
   console.log("nickie in Feed:", nickie);  // <-- ADD HERE
 
@@ -79,9 +81,7 @@ function Feed() {
     setPostTitle(e.target.value)
   }
 
-  const setPostdata = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPostbody(e.target.value)
-  }
+
 
   const sendpostData = async (e: React.FormEvent) => {
   e.preventDefault();
@@ -92,12 +92,14 @@ function Feed() {
   }
 
   try {
+    setState(true)
     const tx = await contract.setPost(postTitle, postbody, nickie);
 
     await tx.wait();
 
     console.log("Data sent to the contract!");
     setModalstate(false);
+    setState(false)
   } catch (err) {
     console.error("The error is:", err);
   }
@@ -109,7 +111,7 @@ function Feed() {
       <nav>
         <input type="search" className='searchbar' />
         <ul>
-          <NavLink to="/profile"><li>Profile: {nickie || "unknown"}</li></NavLink>
+          <NavLink to="/profile"><li><img src={uploadfile} width={40} className="smallprofilepic"/></li></NavLink>
         </ul>
       </nav>
 
@@ -133,12 +135,18 @@ function Feed() {
         <h3>Title</h3>
         <input type="text" onChange={setTitle}/>
         <h3>Body</h3>
-        <input type="area" onChange={setPostdata}/>
+        <textarea onChange={(e) => setPostbody(e.target.value)} />
         <button onClick={sendpostData}>submit</button>
         <button onClick={() => setModalstate(false)}>Close</button>
       </div>
     </div>
   )
+}
+{
+  state && (<>
+  <div className="loading-overlay">
+      <div className="spinner" />
+    </div></>)
 }
 
         <div className='bottomdiv'>

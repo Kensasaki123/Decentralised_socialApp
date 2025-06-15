@@ -2,11 +2,13 @@ import React, { useState, useEffect, type ChangeEvent, useCallback } from 'react
 import './Profile.css';
 import { useContract } from '../context/ContractContext';
 import useProfile from '../stores/profilestore';
+import useLoadingScreen from '../stores/loadingstore';
 
 function Profile() {
   const [profilepic, setProfilePic] = useState<File | null>(null);
   const { contract, address } = useContract();
   const [loginstate, setLoginstate] = useState<boolean>(false)
+  const { state, setState } = useLoadingScreen();
 
   const { nickie, setNickie, birthday, setBirthday, uploadfile, setUploadfile} = useProfile();
   
@@ -98,13 +100,21 @@ useEffect(() => {
   }
 
   try {
+    setState(true);
 const birthdayTimestamp = birthday ? Math.floor(new Date(birthday).getTime() / 1000) : 0;
+console.log("About to send:", {
+  nickie,
+  birthdayTimestamp,
+  uploadfile
+});
 
 const tx = await contract.setProfile(nickie, birthdayTimestamp, uploadfile || "");
     await tx.wait();
     console.log("Profile updated!");
+    setState(false)
   } catch (err) {
     console.error("Error setting profile:", err);
+    setState(false)
   }
 };
 
@@ -183,11 +193,17 @@ const handleClick = async (e: React.FormEvent) => {
     </>
   ) : (
     <>
-      <div className='infodiv1'>Nickname: <input type="text" onChange={handleNameChange} /></div>
-      <div className='infodiv2'>Date-of-birth: <input type="date" onChange={handlebirthdaydate}/></div>
+      <div className='infodiv1'>Nickname: <input type="text" value={nickie} onChange={handleNameChange} /></div>
+      <div className='infodiv2'>Date-of-birth: <input type="date" value={birthday} onChange={handlebirthdaydate}/></div>
       <button onClick={handleClick}>Confirm</button>
     </>
   )}
+  {
+  state && (<>
+  <div className="loading-overlay">
+      <div className="spinner" />
+    </div></>)
+}
   <div className='moreinfo'>Last joined: </div>
 </div>
 

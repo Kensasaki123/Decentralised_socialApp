@@ -12,7 +12,6 @@ import Latest from './Components2/pages/Latest'
 import MostPopular from './Components2/pages/MostPopular';
 import Trending from './Components2/pages/Trending';
 import { useContract } from './context/ContractContext';
-import { useState } from 'react';
 
 
 function App() {
@@ -21,10 +20,7 @@ function App() {
   const { contract } = useContract();
 
   const location = useLocation();
-  const [birthday, setBirthday] = useState<string | null>(null);
-const [nickie, setNickie] = useState<string>('');
-const [uploadFile, setUploadFile] = useState<string>('');
-
+  
 
 
 	useEffect(() => {
@@ -53,12 +49,6 @@ const [uploadFile, setUploadFile] = useState<string>('');
   path='/feed'
   element={
     <Feed
-      birthday={birthday}
-      setBirthday={setBirthday}
-      nickie={nickie}
-      setNickie={setNickie}
-      uploadFile={uploadFile}
-      setUploadFile={setUploadFile}
     />
   }>
 
@@ -70,12 +60,6 @@ const [uploadFile, setUploadFile] = useState<string>('');
   path="/profile"
   element={
     <Profile
-      birthday={birthday}
-      setBirthday={setBirthday}
-      nickie={nickie}
-      setNickie={setNickie}
-      uploadFile={uploadFile}
-      setUploadFile={setUploadFile}
     />
   }
 />
