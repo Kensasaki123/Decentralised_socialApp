@@ -4,6 +4,8 @@ import type { Dispatch, SetStateAction } from "react";
 import { BrowserProvider, JsonRpcSigner, Contract } from "ethers";
 import detectEthereumProvider from "@metamask/detect-provider";
 import type { Eip1193Provider } from "ethers";
+import { contractABI, contractAddress } from "../constants/contract";
+
 
 
 // ✅ Replace with your contract's ABI and address
