@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import './About.css';
 
 function About() {
+  const [activeSlide, setActiveSlide] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-  
+
   const topics = [
     {
       title: "Smart Contract Development",
@@ -32,33 +33,37 @@ function About() {
     }
   ];
 
-  
-
   useEffect(() => {
     setIsVisible(true);
-    
-    // Auto-rotate slideshow
+
     const interval = setInterval(() => {
       setActiveSlide(prev => (prev + 1) % 3);
     }, 5000);
-    
+
     return () => clearInterval(interval);
   }, []);
 
   return (
     <div className={`about-container ${isVisible ? 'visible' : ''}`}>
+      
+      {/* Particle Animation Layer */}
       <div className="particles">
         {[...Array(30)].map((_, i) => (
-          <div key={i} className="particle" style={{
-            '--size': `${Math.random() * 8 + 2}px`,
-            '--x': `${Math.random() * 100}%`,
-            '--y': `${Math.random() * 100}%`,
-            '--delay': `${Math.random() * 5}s`,
-            '--duration': `${Math.random() * 10 + 5}s`
-          } as React.CSSProperties}></div>
+          <div
+            key={i}
+            className="particle"
+            style={{
+              '--size': `${Math.random() * 8 + 2}px`,
+              '--x': `${Math.random() * 100}%`,
+              '--y': `${Math.random() * 100}%`,
+              '--delay': `${Math.random() * 5}s`,
+              '--duration': `${Math.random() * 10 + 5}s`,
+            } as React.CSSProperties}
+          ></div>
         ))}
       </div>
-      
+
+      {/* Hero Section */}
       <div className="hero-section">
         <div className="hero-content">
           <h1 className="hero-title">
@@ -69,7 +74,8 @@ function About() {
           </p>
         </div>
       </div>
-      
+
+      {/* Mission Section */}
       <div className="mission-section">
         <div className="mission-content">
           <h2 className="section-title">Our Mission</h2>
@@ -103,30 +109,25 @@ function About() {
           </div>
         </div>
       </div>
-      
+
+      {/* Topics Section */}
       <div className="topics-section">
         <h2 className="section-title">Discussion Topics</h2>
         <p className="section-subtitle">Explore the cutting-edge conversations happening daily</p>
-        
         <div className="topics-grid">
-          {topics.map((topic, index) => (
-            <div className="topic-card" key={index}>
-              <div className="topic-icon">{topic.icon}</div>
-              <h3 className="topic-title">{topic.title}</h3>
-              <p className="topic-description">{topic.description}</p>
-            </div>
-          ))}
+          <div className="topic-card">
+  <div className="topic-icon">{topics[activeSlide].icon}</div>
+  <h3 className="topic-title">{topics[activeSlide].title}</h3>
+  <p className="topic-description">{topics[activeSlide].description}</p>
+</div>
+
         </div>
       </div>
-      
-  
-      
-     
-      
+
+      {/* Call to Action Section */}
       <div className="cta-section">
         <h2 className="cta-title">Ready to Join the Future of Blockchain Development?</h2>
         <p>Connect with thousands of Solidity developers worldwide</p>
-        
       </div>
     </div>
   );
