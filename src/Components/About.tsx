@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import './About.css';
 
 function About() {
-  const [activeSlide, setActiveSlide] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   
   const topics = [

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, } from 'react';
 import './Contact.css';
 
 function Contact() {
@@ -10,12 +10,12 @@ function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     
@@ -32,17 +32,7 @@ function Contact() {
 
   return (
     <div className="contact-container">
-      <div className="particles">
-        {[...Array(30)].map((_, i) => (
-          <div key={i} className="particle" style={{
-            '--size': `${Math.random() * 8 + 2}px`,
-            '--x': `${Math.random() * 100}%`,
-            '--y': `${Math.random() * 100}%`,
-            '--delay': `${Math.random() * 5}s`,
-            '--duration': `${Math.random() * 10 + 5}s`
-          }}></div>
-        ))}
-      </div>
+      
       
       <div className="contact-header">
         <h1 className="neon-title">Get In Touch</h1>
