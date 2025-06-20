@@ -4,6 +4,8 @@ import { useContract } from '../context/ContractContext';
 import { useEffect, useState, useCallback } from 'react';
 import useProfile from "../stores/profilestore";
 import useLoadingScreen from "../stores/loadingstore";
+import { useLocation } from 'react-router-dom';
+
 
 
 
@@ -16,6 +18,9 @@ function Feed() {
 
 
   console.log("nickie in Feed:", nickie);  // <-- ADD HERE
+
+  const location = useLocation();
+
 
   const [modelstate, setModalstate] = useState<boolean>(false);
   const [postTitle, setPostTitle] = useState<string>("")
@@ -108,22 +113,72 @@ function Feed() {
 
   return (
     <>
-      <nav>
-        <input type="search" className='searchbar' />
-        <ul>
-          <NavLink to="/profile"><li><img src={uploadfile} width={40} className="smallprofilepic"/></li></NavLink>
-        </ul>
-      </nav>
+      <nav className="cyber-nav">
+  <input type="search" placeholder="Search..." className="searchbar neon-input" />
+  <ul>
+    <NavLink to="/profile">
+      <li>
+        <img src={uploadfile} width={40} className="smallprofilepic neon-border" />
+      </li>
+    </NavLink>
+  </ul>
+</nav>
+
 
       <div className='downroot'>
         <div className='buttondiv'>
-          <div className='buttondiv1'>
-            <ul>
-              <li><NavLink to="mostpopular">Most Popular</NavLink></li>
-              <li><NavLink to="latest">Latest</NavLink></li>
-              <li><NavLink to="trending">Trending</NavLink></li>
-            </ul>
-          </div>
+<div className="radio-inputs">
+  <label className="radio">
+    <input 
+      type="radio" 
+      name="radio" 
+      checked={location.pathname.includes('mostpopular')}
+      readOnly
+    />
+    <span className="name">
+      <NavLink 
+        to="mostpopular"
+        className={({ isActive }) => isActive ? "active-navlink" : ""}
+      >
+        Most Popular
+      </NavLink>
+    </span>
+  </label>
+  <label className="radio">
+    <input 
+      type="radio" 
+      name="radio" 
+      checked={location.pathname.includes('latest')}
+      readOnly
+    />
+    <span className="name">
+      <NavLink 
+        to="latest"
+        className={({ isActive }) => isActive ? "active-navlink" : ""}
+      >
+        Latest
+      </NavLink>
+    </span>
+  </label>
+  <label className="radio">
+    <input 
+      type="radio" 
+      name="radio" 
+      checked={location.pathname.includes('trending')}
+      readOnly
+    />
+    <span className="name">
+      <NavLink 
+        to="trending"
+        className={({ isActive }) => isActive ? "active-navlink" : ""}
+      >
+        Trending
+      </NavLink>
+    </span>
+  </label>
+</div>
+    
+   
           <div className="buttondiv2">
             <ul><li onClick={setModal}>Post</li></ul>
           </div>

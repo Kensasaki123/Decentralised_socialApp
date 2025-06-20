@@ -1,109 +1,230 @@
-.searchbar {
-    height: 3rem;
-    border: none;
-    border-radius: 20px;
-    
-}
+/* ===== Base Styles ===== */
 
-nav { 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 1000; 
-  background-color: rgb(170, 39, 39); 
-}
+
+
+
 
 
 .downroot {
-    background-color: aqua;
-    height: 100%;
-    width: 100%;
-}
-
-.buttondiv {
-  background-color: black;
-  color: white;
-  height: 10%;
-  display: flex;
-  align-items:center ;
-  justify-content: space-between;
-  position: sticky;
-
-  
-}
-
-.buttondiv1 ul, .buttondiv2 ul {
-  display: flex;
-  gap: 1rem; 
-  list-style: none; 
-  padding: 0;
-  margin: 0;
-  border: 2px solid white;
-  background-color: rgb(41, 41, 41);
-}
-
-.downroot {
+  background-color: #0a0a0a;
+  min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
+/* ===== Button Div Styles ===== */
+.buttondiv {
+  background-color: #111;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 60px; /* Adjust based on your nav height */
+  z-index: 999;
+  border-bottom: 1px solid #333;
+}
+
+.buttondiv1 ul, 
+.buttondiv2 ul {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.buttondiv2 ul li {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  background: rgba(148, 0, 211, 0.3);
+  transition: all 0.3s ease;
+}
+
+.buttondiv2 ul li:hover {
+  background: rgba(148, 0, 211, 0.5);
+  transform: translateY(-2px);
+}
+
+/* ===== Radio Inputs - Enhanced Version ===== */
+.radio-inputs {
+  position: relative;
+  display: flex;
+  border-radius: 12px;
+  background-color: rgba(30, 30, 30, 0.8);
+  backdrop-filter: blur(12px);
+  padding: 0.5rem;
+  width: 100%;
+  max-width: 400px;
+  font-size: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(0, 0, 0, 0.05),
+    0 0 20px rgba(148, 0, 211, 0.2);
+}
+
+.radio-inputs .radio {
+  flex: 1 1 auto;
+  text-align: center;
+  position: relative;
+}
+
+.radio-inputs .radio input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radio-inputs .radio .name {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 0.75rem 0;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+  margin: 0 2px;
+}
+
+/* Hover state */
+.radio-inputs .radio .name:hover {
+  color: white;
+  background-color: rgba(148, 0, 211, 0.2);
+}
+
+/* Active/Checked state */
+.radio-inputs .radio input:checked + .name,
+.radio-inputs .radio .name.active-navlink {
+  color: white;
+  font-weight: 600;
+  background-color: rgba(148, 0, 211, 0.4);
+  box-shadow: 
+    inset 0 0 12px rgba(148, 0, 211, 0.6),
+    0 0 16px rgba(148, 0, 211, 0.4);
+  text-shadow: 
+    0 0 8px rgba(255, 255, 255, 0.8),
+    0 0 12px rgba(148, 0, 211, 0.8);
+  transform: translateY(-1px);
+}
+
+/* NavLink styles */
+.radio-inputs .radio .name a {
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.5rem;
+}
+
+/* ===== Other Components ===== */
 .bottomdiv {
   flex-grow: 1;
-  padding: 1rem;
-  background-color: #f0f0f0;
+  padding: 2rem;
+  background-color: #0f0f0f;
 }
 
-.buttondiv1  li {
-  text-decoration: none;
+.smallprofilepic {
+  border-radius: 50%;
+  border: 2px solid rgba(148, 0, 211, 0.5);
+  transition: all 0.3s ease;
 }
 
+.smallprofilepic:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(148, 0, 211, 0.6);
+}
+
+/* Modal Styles */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Dim background */
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* On top of everything */
+  z-index: 2000;
+  backdrop-filter: blur(5px);
 }
 
 .modal {
-  background-color: white;
+  background-color: #1e1e1e;
   padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 0 30px rgba(148, 0, 211, 0.3);
   width: 90%;
   max-width: 500px;
-  position: relative;
+  color: white;
 }
 
-.smallprofilepic{
-  border-radius: 20px;
+.modal input,
+.modal textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  transition: all 0.3s ease;
 }
 
-/* styles/LoadingScreen.css */
+.modal input:focus,
+.modal textarea:focus {
+  outline: none;
+  border-color: rgba(148, 0, 211, 0.7);
+  box-shadow: 0 0 0 2px rgba(148, 0, 211, 0.3);
+}
+
+.modal button {
+  padding: 0.75rem 1.5rem;
+  margin-right: 1rem;
+  border-radius: 8px;
+  border: none;
+  background: rgba(148, 0, 211, 0.6);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal button:hover {
+  background: rgba(148, 0, 211, 0.8);
+  transform: translateY(-2px);
+}
+
+/* Loading Spinner */
 .loading-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black */
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;
+  backdrop-filter: blur(5px);
 }
 
 .spinner {
-  border: 6px solid rgba(255, 255, 255, 0.3);
-  border-top: 6px solid white;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top: 4px solid rgba(148, 0, 211, 0.8);
   border-radius: 50%;
   width: 60px;
   height: 60px;
@@ -114,4 +235,49 @@ nav {
   to {
     transform: rotate(360deg);
   }
+}
+.cyber-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0f0f1c;
+  padding: 1rem 2rem;
+  border-bottom: 2px solid #9d00ff;
+  box-shadow: 0 0 20px #9d00ff50;
+}
+
+.neon-input {
+  background: transparent;
+  border: 2px solid #9d00ff;
+  padding: 0.5rem 1rem;
+  color: #ffffff;
+  outline: none;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  box-shadow: 0 0 10px #9d00ff;
+  transition: 0.3s ease-in-out;
+}
+
+.neon-input::placeholder {
+  color: #bb86fc;
+}
+
+.neon-input:focus {
+  box-shadow: 0 0 20px #9d00ff, 0 0 30px #ff00ff;
+  border-color: #ff00ff;
+}
+
+.smallprofilepic {
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.neon-border {
+  border: 2px solid #00ffee;
+  box-shadow: 0 0 10px #00ffee;
+}
+
+.neon-border:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px #00ffee, 0 0 30px #9d00ff;
 }

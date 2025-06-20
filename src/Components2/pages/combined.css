@@ -1,0 +1,318 @@
+/* src/components/Latest.css */
+:root {
+  --neon-purple: #c724e9;
+  --neon-pink: #ff2a6d;
+  --dark-purple: #1a0529;
+  --darker-purple: #0d0114;
+  --glass-bg: rgba(30, 7, 48, 0.6);
+  --glass-border: rgba(199, 36, 233, 0.2);
+  --text-light: #f0e6f5;
+  --text-glow: 0 0 10px rgba(199, 36, 233, 0.8);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 5px var(--neon-purple); }
+  50% { box-shadow: 0 0 20px var(--neon-purple), 0 0 30px var(--neon-pink); }
+  100% { box-shadow: 0 0 5px var(--neon-purple); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+.latest-container {
+  padding: 2rem;
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.neon-title {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+.neon-title span {
+  position: relative;
+  text-shadow: 
+    0 0 5px #fff,
+    0 0 10px #fff,
+    0 0 15px var(--neon-pink),
+    0 0 20px var(--neon-purple),
+    0 0 25px var(--neon-purple);
+  color: white;
+}
+
+.neon-divider {
+  width: 200px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--neon-purple), var(--neon-pink), transparent);
+  margin: 0 auto;
+  border-radius: 2px;
+  position: relative;
+}
+
+.neon-divider::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: var(--neon-pink);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 15px var(--neon-pink);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 1rem;
+}
+
+.neon-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease;
+  transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+  cursor: pointer;
+}
+
+.neon-card:hover {
+  transform: translateY(-15px) scale(1.03);
+  box-shadow: 
+    0 20px 30px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(199, 36, 233, 0.4);
+}
+
+.card-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(199, 36, 233, 0.3) 0%, transparent 70%);
+  opacity: 0.5;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.neon-card:hover .card-glow {
+  opacity: 1;
+}
+
+.card-image {
+  height: 200px;
+  background: linear-gradient(45deg, var(--darker-purple), var(--dark-purple));
+  position: relative;
+  overflow: hidden;
+}
+
+.card-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(199, 36, 233, 0.2) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255, 42, 109, 0.2) 0%, transparent 40%);
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  margin: 0 0 1rem 0;
+  color: white;
+  position: relative;
+  display: inline-block;
+}
+
+.card-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: var(--neon-purple);
+  border-radius: 2px;
+  box-shadow: 0 0 10px var(--neon-purple);
+}
+
+.card-body {
+  color: var(--text-light);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1rem;
+}
+
+.author-badge {
+  display: flex;
+  align-items: center;
+  background: rgba(199, 36, 233, 0.1);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+}
+
+.author-icon {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.author-name {
+  color: white;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.card-stats {
+  display: flex;
+  gap: 15px;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+/* Loading states */
+.loading-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 1rem;
+}
+
+.card-skeleton {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--glass-border);
+  height: 380px;
+}
+
+.skeleton-image {
+  height: 200px;
+  background: rgba(30, 7, 48, 0.7);
+  position: relative;
+}
+
+.skeleton-content {
+  padding: 1.5rem;
+}
+
+.skeleton-title {
+  height: 25px;
+  width: 70%;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+}
+
+.skeleton-text {
+  height: 15px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  margin-bottom: 0.8rem;
+}
+
+.skeleton-text:nth-child(3) {
+  width: 85%;
+}
+
+.skeleton-author {
+  height: 20px;
+  width: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  margin-top: 1.5rem;
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .card-grid, .loading-cards {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  
+  .neon-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-grid, .loading-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .neon-title {
+    font-size: 2rem;
+  }
+}
